@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Almoxarifado SENAC — Controle de Materiais</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <span class="logo-icon">🏥</span>
+        <div>
+          <h1 class="logo-title">Almoxarifado</h1>
+          <p class="logo-sub">SENAC Zona Norte — Curso Técnico de Enfermagem</p>
+        </div>
+      </div>
+      <span class="header-badge">Sprint 1</span>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- FORMULÁRIO DE CADASTRO -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">Cadastrar Material</h2>
+        <p class="card-desc">Adicione um novo item ao estoque do almoxarifado.</p>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="input-nome">Nome do Material</label>
+          <input
+            type="text"
+            id="input-nome"
+            placeholder="Ex: Luvas de procedimento"
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-group form-group--sm">
+          <label for="input-quantidade">Quantidade</label>
+          <input
+            type="number"
+            id="input-quantidade"
+            placeholder="Ex: 100"
+            min="0"
+          />
+        </div>
+        <div class="form-group form-group--btn">
+          <label class="label-invisible">Ação</label>
+          <button id="btn-cadastrar">
+            <span class="btn-icon">＋</span> Cadastrar
+          </button>
+        </div>
+      </div>
+
+      <div id="msg-feedback" class="feedback hidden"></div>
+    </section>
+
+    <!-- TABELA DE MATERIAIS -->
+    <section class="card">
+      <div class="card-header card-header--row">
+        <div>
+          <h2 class="card-title">Inventário de Materiais</h2>
+          <p class="card-desc">Materiais cadastrados no sistema via MockAPI.</p>
+        </div>
+        <button class="btn-refresh" id="btn-refresh" title="Atualizar lista">↻ Atualizar</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="lista-materiais">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Material</th>
+              <th>Quantidade</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-materiais">
+            <tr class="loading-row">
+              <td colspan="3">
+                <span class="loading-spinner"></span>
+                Carregando materiais...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Sistema de Almoxarifado · SENAC Zona Norte · ADS 3º Sem · 2026</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
