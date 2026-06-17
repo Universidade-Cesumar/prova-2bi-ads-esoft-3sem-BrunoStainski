@@ -23,27 +23,36 @@ A enfermeira Camila é responsável pelo almoxarifado do curso técnico de Enfer
 - Botão de atualização manual da lista
 - Interface responsiva (desktop e mobile)
 
+## ✅ Funcionalidades — Sprint 2
+
+- **Retirada de estoque (baixa):** cada item da lista possui um campo para informar a quantidade a retirar e um botão `.btn-baixar`, que envia um `PUT` atualizando o saldo no MockAPI
+- **Validação de regras de negócio:** função `validarRetirada(estoqueAtual, quantidadeRetirada)` bloqueia retiradas negativas, zeradas ou maiores que o saldo disponível, evitando estoque negativo
+- **Exclusão de materiais:** botão `.btn-excluir` abre um modal de confirmação antes de remover o item via `DELETE`, evitando exclusões acidentais
+- Feedback visual específico para cada erro de validação (quantidade inválida, estoque insuficiente)
+
 ## 📁 Estrutura de Arquivos
 
 ```
 /
-├── index.html   # Página principal
+├── index.html   # Página principal (formulário + tabela + modal)
 ├── style.css    # Estilização
-├── app.js       # Lógica JavaScript e integração com a API
+├── main.js      # Lógica JavaScript, validações e integração com a API
 └── README.md    # Documentação
 ```
 
+![alt text](image.png)
+
 ## ▶️ Como Rodar
 
-Não é necessário instalar nada. Basta abrir o arquivo `index.html` no navegador.
+Recomenda-se abrir o projeto com a extensão **Live Server** do VS Code (botão direito em `index.html` → "Open with Live Server"), para evitar bloqueios de CORS do navegador.
 
 > A aplicação consome a API hospedada no MockAPI.io — é necessário ter conexão com a internet.
 
 ## 🔗 API
 
-- **Base URL:** `https://6a31d1b77bc5e1c612663273.mockapi.io/materias`
-- **Recurso:** `materias`
-- **Métodos utilizados:** `GET` (listar), `POST` (cadastrar)
+- **Base URL:** `https://6a31d1b77bc5e1c612663273.mockapi.io/materiais`
+- **Recurso:** `materiais`
+- **Métodos utilizados:** `GET` (listar), `POST` (cadastrar), `PUT` (atualizar/baixar estoque), `DELETE` (excluir)
 
 ## 👨‍💻 Desenvolvedor
 
