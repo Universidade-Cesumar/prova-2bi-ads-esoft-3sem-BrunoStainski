@@ -77,11 +77,13 @@
               <th>#</th>
               <th>Material</th>
               <th>Quantidade</th>
+              <th>Retirar</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody id="tbody-materiais">
             <tr class="loading-row">
-              <td colspan="3">
+              <td colspan="5">
                 <span class="loading-spinner"></span>
                 Carregando materiais...
               </td>
@@ -93,10 +95,22 @@
 
   </main>
 
+  <!-- MODAL DE CONFIRMAÇÃO DE EXCLUSÃO -->
+  <div id="modal-confirmar" class="modal-overlay hidden">
+    <div class="modal-box">
+      <h3 class="modal-title">Confirmar exclusão</h3>
+      <p class="modal-text">Tem certeza que deseja excluir <strong id="modal-item-nome"></strong> do estoque? Essa ação não pode ser desfeita.</p>
+      <div class="modal-actions">
+        <button id="modal-cancelar" class="btn-modal btn-modal--cancel">Cancelar</button>
+        <button id="modal-confirmar-btn" class="btn-modal btn-modal--danger">Excluir</button>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer">
     <p>Sistema de Almoxarifado · SENAC Zona Norte · ADS 3º Sem · 2026</p>
   </footer>
 
-  <script src="main.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
