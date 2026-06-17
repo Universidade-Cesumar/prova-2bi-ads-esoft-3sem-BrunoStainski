@@ -1,4 +1,4 @@
-const API_URL = 'https://6a31d1b77bc5e1c612663273.mockapi.io/materias';
+const API_URL = 'https://6a31d1b77bc5e1c612663273.mockapi.io/materiais';
 
 // ─── Elementos do DOM ────────────────────────────────
 const inputNome       = document.getElementById('input-nome');

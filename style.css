@@ -286,6 +286,142 @@ input:focus {
   border: 1px solid #B8D4EF;
 }
 
+/* ─── Coluna de retirada e ações ─────────────────────── */
+#lista-materiais th:nth-child(4),
+#lista-materiais th:nth-child(5) { width: 110px; }
+
+.input-retirada-row {
+  border: 1.5px solid var(--clr-border);
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: .82rem;
+  font-family: var(--font);
+  width: 64px;
+  text-align: center;
+}
+
+.input-retirada-row:focus {
+  outline: none;
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(26,109,181,.12);
+}
+
+.td-acoes {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.btn-baixar {
+  background: var(--clr-accent);
+  color: var(--clr-primary);
+  border: 1.5px solid #B8D4EF;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: .78rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .2s;
+}
+
+.btn-baixar:hover { background: #D5E8F8; }
+
+.btn-excluir {
+  background: var(--clr-error-bg);
+  color: var(--clr-error);
+  border: 1.5px solid #F5B7B1;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: .85rem;
+  font-weight: 700;
+  font-family: var(--font);
+  cursor: pointer;
+  line-height: 1;
+  transition: background .2s;
+}
+
+.btn-excluir:hover { background: #FAD7D2; }
+
+/* ─── Modal de confirmação ────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 46, 76, .55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal-overlay.hidden { display: none; }
+
+.modal-box {
+  background: var(--clr-surface);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 40px rgba(0,0,0,.25);
+  padding: 26px;
+  max-width: 380px;
+  width: 100%;
+}
+
+.modal-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  margin-bottom: 10px;
+}
+
+.modal-text {
+  font-size: .88rem;
+  color: var(--clr-muted);
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+.modal-text strong { color: var(--clr-text); }
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-modal {
+  border: none;
+  border-radius: 7px;
+  padding: 9px 16px;
+  font-size: .85rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background .2s, transform .1s;
+}
+
+.btn-modal:active { transform: scale(.97); }
+
+.btn-modal--cancel {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  border: 1.5px solid var(--clr-border);
+}
+
+.btn-modal--cancel:hover { background: var(--clr-border); }
+
+.btn-modal--danger {
+  background: var(--clr-error);
+  color: #fff;
+}
+
+.btn-modal--danger:hover { background: #A93226; }
+
+.btn-modal--danger:disabled {
+  background: #E59E97;
+  cursor: not-allowed;
+}
+
 /* ─── Loading ────────────────────────────────────────── */
 .loading-row td {
   text-align: center;
@@ -335,4 +471,8 @@ input:focus {
   .form-group, .form-group--sm, .form-group--btn { flex: 1 1 100%; }
   .card { padding: 20px 16px; }
   .card-header--row { flex-direction: column; }
+  .td-acoes { flex-direction: column; align-items: stretch; }
+  .input-retirada-row { width: 100%; }
+  #lista-materiais { font-size: .8rem; }
+  #lista-materiais th, #lista-materiais td { padding: 8px 8px; }
 }
