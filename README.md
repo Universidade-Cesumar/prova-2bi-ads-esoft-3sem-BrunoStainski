@@ -1,7 +1,6 @@
 # 🏥 Almoxarifado SENAC — Sistema de Controle de Materiais
 
-🔗 **Projeto no ar:** [https://Universidade-Cesumar.github.io/prova-2bi-ads-esoft-3sem-BrunoStainski/](https://Universidade-Cesumar.github.io/prova-2bi-ads-esoft-3sem-BrunoStainski/)
-*(substitua pelo link real gerado em Settings → Pages após o deploy — veja a seção "Deploy" abaixo)*
+🔗 **Projeto no ar:** [https://universidade-cesumar.github.io/prova-2bi-ads-esoft-3sem-BrunoStainski/](https://universidade-cesumar.github.io/prova-2bi-ads-esoft-3sem-BrunoStainski/)
 
 Sistema web desenvolvido como projeto final da disciplina de Engenharia de Software (ADS 3º Semestre — UniCesumar / SENAC Zona Norte).
 
