@@ -17,7 +17,7 @@
           <p class="logo-sub">SENAC Zona Norte — Curso Técnico de Enfermagem</p>
         </div>
       </div>
-      <span class="header-badge">Sprint 2</span>
+      <span class="header-badge">Sprint 3</span>
     </div>
   </header>
 
@@ -60,12 +60,32 @@
       <div id="msg-feedback" class="feedback hidden"></div>
     </section>
 
+    <!-- DASHBOARD: TOTAL DE ITENS E BUSCA -->
+    <section class="card card--dashboard">
+      <div class="dashboard-row">
+        <div class="dashboard-stat">
+          <span class="dashboard-stat-label">Total de itens cadastrados</span>
+          <span id="total-itens" class="dashboard-stat-value">0</span>
+        </div>
+        <div class="dashboard-search">
+          <label for="input-busca" class="label-invisible">Pesquisar material</label>
+          <input
+            type="text"
+            id="input-busca"
+            placeholder="🔍 Pesquisar material..."
+            autocomplete="off"
+          />
+        </div>
+      </div>
+    </section>
+
     <!-- TABELA DE MATERIAIS -->
     <section class="card">
       <div class="card-header card-header--row">
         <div>
           <h2 class="card-title">Inventário de Materiais</h2>
           <p class="card-desc">Materiais cadastrados no sistema via MockAPI.</p>
+          <p class="legend-critico"><span class="legend-dot"></span> Estoque crítico (menos de 10 unidades)</p>
         </div>
         <button class="btn-refresh" id="btn-refresh" title="Atualizar lista">↻ Atualizar</button>
       </div>
