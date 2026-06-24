@@ -1,4 +1,5 @@
 const API_URL = 'https://6a31d1b77bc5e1c612663273.mockapi.io/materiais';
+const LIMITE_ESTOQUE_CRITICO = 10;
 
 // ─── Elementos do DOM ────────────────────────────────
 const inputNome       = document.getElementById('input-nome');
@@ -7,6 +8,8 @@ const btnCadastrar    = document.getElementById('btn-cadastrar');
 const btnRefresh      = document.getElementById('btn-refresh');
 const tbody           = document.getElementById('tbody-materiais');
 const msgFeedback     = document.getElementById('msg-feedback');
+const inputBusca      = document.getElementById('input-busca');
+const totalItens      = document.getElementById('total-itens');
 
 const modalOverlay    = document.getElementById('modal-confirmar');
 const modalItemNome   = document.getElementById('modal-item-nome');
@@ -45,9 +48,28 @@ function validarRetirada(estoqueAtual, quantidadeRetirada) {
   return true;
 }
 
+// ─── Atualizar contador do dashboard ─────────────────
+function atualizarTotalItens(materiais) {
+  totalItens.textContent = materiais.length;
+}
+
+// ─── Filtrar materiais pela busca ────────────────────
+function filtrarMateriais(materiais, termoBusca) {
+  const termo = termoBusca.trim().toLowerCase();
+  if (!termo) return materiais;
+  return materiais.filter(item => item.nome.toLowerCase().includes(termo));
+}
+
 // ─── Renderizar tabela ───────────────────────────────
 function renderizarMateriais(materiais) {
   materiaisAtuais = materiais;
+
+  // O dashboard mostra o total real do estoque, independente do filtro de busca aplicado
+  atualizarTotalItens(materiais);
+
+  const termoBusca = inputBusca ? inputBusca.value : '';
+  const materiaisFiltrados = filtrarMateriais(materiais, termoBusca);
+
   tbody.innerHTML = '';
 
   if (materiais.length === 0) {
@@ -58,11 +80,26 @@ function renderizarMateriais(materiais) {
     return;
   }
 
-  materiais.forEach((item, index) => {
+  if (materiaisFiltrados.length === 0) {
+    tbody.innerHTML = `
+      <tr class="empty-row">
+        <td colspan="5">Nenhum material encontrado para "${termoBusca}".</td>
+      </tr>`;
+    return;
+  }
+
+  materiaisFiltrados.forEach((item, index) => {
     const tr = document.createElement('tr');
+
+    // Contrato técnico: itens com estoque abaixo do limite recebem a classe estoque-critico via JS
+    const quantidade = Number(item.quantidade);
+    if (quantidade < LIMITE_ESTOQUE_CRITICO) {
+      tr.classList.add('estoque-critico');
+    }
+
     tr.innerHTML = `
       <td>${index + 1}</td>
-      <td>${item.nome}</td>
+      <td>${item.nome}${quantidade < LIMITE_ESTOQUE_CRITICO ? ' <span class="alerta-badge" title="Estoque crítico">⚠️ baixo</span>' : ''}</td>
       <td><span class="qty-badge">${item.quantidade}</span></td>
       <td>
         <input
@@ -112,10 +149,17 @@ async function carregarMateriais() {
     renderizarMateriais(materiais);
 
   } catch (erro) {
+    // TypeError ocorre quando o fetch nem chega a se conectar (sem internet, DNS, CORS bloqueado)
+    const semConexao = erro instanceof TypeError;
     tbody.innerHTML = `
       <tr class="empty-row">
-        <td colspan="5">Erro ao carregar materiais. Verifique a conexão.</td>
+        <td colspan="5">
+          ${semConexao
+            ? 'Sem conexão com a internet. Verifique sua rede e clique em "Atualizar".'
+            : 'Erro ao carregar materiais. Tente novamente em alguns instantes.'}
+        </td>
       </tr>`;
+    totalItens.textContent = '—';
     console.error('Erro no GET:', erro);
   }
 }
@@ -154,7 +198,13 @@ async function cadastrarMaterial() {
     await carregarMateriais();
 
   } catch (erro) {
-    mostrarFeedback('Erro ao cadastrar. Tente novamente.', 'error');
+    const semConexao = erro instanceof TypeError;
+    mostrarFeedback(
+      semConexao
+        ? 'Sem conexão com a internet. Verifique sua rede e tente novamente.'
+        : 'Erro ao cadastrar o material. Tente novamente.',
+      'error'
+    );
     console.error('Erro no POST:', erro);
   } finally {
     btnCadastrar.disabled = false;
@@ -201,7 +251,13 @@ async function baixarEstoque(id) {
     await carregarMateriais();
 
   } catch (erro) {
-    mostrarFeedback('Erro ao atualizar o estoque. Tente novamente.', 'error');
+    const semConexao = erro instanceof TypeError;
+    mostrarFeedback(
+      semConexao
+        ? 'Sem conexão com a internet. A baixa não foi salva no servidor.'
+        : 'Erro ao atualizar o estoque. Tente novamente.',
+      'error'
+    );
     console.error('Erro no PUT:', erro);
   }
 }
@@ -242,7 +298,13 @@ async function excluirMaterial() {
     await carregarMateriais();
 
   } catch (erro) {
-    mostrarFeedback('Erro ao excluir o material. Tente novamente.', 'error');
+    const semConexao = erro instanceof TypeError;
+    mostrarFeedback(
+      semConexao
+        ? 'Sem conexão com a internet. O item não foi excluído no servidor.'
+        : 'Erro ao excluir o material. Tente novamente.',
+      'error'
+    );
     console.error('Erro no DELETE:', erro);
   } finally {
     modalConfirmar.disabled = false;
@@ -257,6 +319,11 @@ modalCancelar.addEventListener('click', fecharModal);
 modalConfirmar.addEventListener('click', excluirMaterial);
 modalOverlay.addEventListener('click', (e) => {
   if (e.target === modalOverlay) fecharModal();
+});
+
+// A busca filtra em memória os dados já carregados, sem precisar de nova chamada à API
+inputBusca.addEventListener('input', () => {
+  renderizarMateriais(materiaisAtuais);
 });
 
 // ─── Inicialização ───────────────────────────────────
