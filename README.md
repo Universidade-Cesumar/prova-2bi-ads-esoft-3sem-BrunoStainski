@@ -1,6 +1,7 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/B74p-HKt)
-
 # 🏥 Almoxarifado SENAC — Sistema de Controle de Materiais
+
+🔗 **Projeto no ar:** [https://Universidade-Cesumar.github.io/prova-2bi-ads-esoft-3sem-BrunoStainski/](https://Universidade-Cesumar.github.io/prova-2bi-ads-esoft-3sem-BrunoStainski/)
+*(substitua pelo link real gerado em Settings → Pages após o deploy — veja a seção "Deploy" abaixo)*
 
 Sistema web desenvolvido como projeto final da disciplina de Engenharia de Software (ADS 3º Semestre — UniCesumar / SENAC Zona Norte).
 
@@ -30,6 +31,14 @@ A enfermeira Camila é responsável pelo almoxarifado do curso técnico de Enfer
 - **Exclusão de materiais:** botão `.btn-excluir` abre um modal de confirmação antes de remover o item via `DELETE`, evitando exclusões acidentais
 - Feedback visual específico para cada erro de validação (quantidade inválida, estoque insuficiente)
 
+## ✅ Funcionalidades — Sprint 3 (Final)
+
+- **Barra de pesquisa:** campo `#input-busca` filtra a lista de materiais em tempo real pelo nome, sem precisar de nova chamada à API
+- **Dashboard:** elemento `#total-itens` exibe a quantidade total de materiais cadastrados no estoque
+- **Alerta de estoque crítico:** itens com menos de 10 unidades recebem automaticamente a classe `.estoque-critico` via JavaScript, destacando a linha em vermelho e exibindo um selo de aviso
+- **Tratamento de erros de rede:** todas as requisições (`GET`, `POST`, `PUT`, `DELETE`) possuem blocos `try/catch`, distinguindo falhas de conexão (sem internet) de erros retornados pelo servidor
+- **Deploy:** projeto publicado via GitHub Pages
+
 ## 📁 Estrutura de Arquivos
 
 ```
@@ -39,8 +48,6 @@ A enfermeira Camila é responsável pelo almoxarifado do curso técnico de Enfer
 ├── main.js      # Lógica JavaScript, validações e integração com a API
 └── README.md    # Documentação
 ```
-
-![alt text](image.png)
 
 ## ▶️ Como Rodar
 
@@ -53,6 +60,15 @@ Recomenda-se abrir o projeto com a extensão **Live Server** do VS Code (botão 
 - **Base URL:** `https://6a31d1b77bc5e1c612663273.mockapi.io/materiais`
 - **Recurso:** `materiais`
 - **Métodos utilizados:** `GET` (listar), `POST` (cadastrar), `PUT` (atualizar/baixar estoque), `DELETE` (excluir)
+
+## 🌐 Deploy (GitHub Pages)
+
+1. No repositório do GitHub, vá em **Settings → Pages**
+2. Em **Build and deployment → Source**, selecione **Deploy from a branch**
+3. Em **Branch**, selecione **master** (ou **main**) e a pasta **/ (root)**
+4. Clique em **Save**
+5. Aguarde alguns minutos e o link será exibido no topo da própria página de Settings → Pages
+6. Copie esse link e cole no topo deste README, substituindo o link de exemplo
 
 ## 👨‍💻 Desenvolvedor
 
