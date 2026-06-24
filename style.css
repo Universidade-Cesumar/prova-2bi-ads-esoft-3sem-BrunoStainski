@@ -447,6 +447,110 @@ input:focus {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* ─── Dashboard (total + busca) ──────────────────────── */
+.card--dashboard { padding: 20px 28px; }
+
+.dashboard-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dashboard-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dashboard-stat-label {
+  font-size: .82rem;
+  color: var(--clr-muted);
+  font-weight: 600;
+}
+
+.dashboard-stat-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--clr-primary);
+  background: var(--clr-accent);
+  border: 1px solid #B8D4EF;
+  border-radius: 8px;
+  padding: 2px 14px;
+  min-width: 44px;
+  text-align: center;
+}
+
+.dashboard-search {
+  flex: 1 1 260px;
+  max-width: 360px;
+}
+
+#input-busca {
+  border: 1.5px solid var(--clr-border);
+  border-radius: 7px;
+  padding: 9px 13px;
+  font-size: .9rem;
+  font-family: var(--font);
+  width: 100%;
+  background: #fff;
+  transition: border-color .2s;
+}
+
+#input-busca:focus {
+  outline: none;
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(26,109,181,.12);
+}
+
+/* ─── Legenda de estoque crítico ─────────────────────── */
+.legend-critico {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .75rem;
+  color: var(--clr-error);
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--clr-error);
+  display: inline-block;
+}
+
+/* ─── Linha de estoque crítico ────────────────────────── */
+#lista-materiais tbody tr.estoque-critico {
+  background: var(--clr-error-bg);
+}
+
+#lista-materiais tbody tr.estoque-critico:hover {
+  background: #FADBD8;
+}
+
+#lista-materiais tbody tr.estoque-critico .qty-badge {
+  background: #FDECEA;
+  color: var(--clr-error);
+  border-color: #F5B7B1;
+}
+
+.alerta-badge {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--clr-error);
+  background: #FDECEA;
+  border: 1px solid #F5B7B1;
+  border-radius: 12px;
+  padding: 1px 8px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
 /* ─── Estado vazio ───────────────────────────────────── */
 .empty-row td {
   text-align: center;
@@ -475,4 +579,6 @@ input:focus {
   .input-retirada-row { width: 100%; }
   #lista-materiais { font-size: .8rem; }
   #lista-materiais th, #lista-materiais td { padding: 8px 8px; }
+  .dashboard-row { flex-direction: column; align-items: stretch; }
+  .dashboard-search { max-width: 100%; }
 }
